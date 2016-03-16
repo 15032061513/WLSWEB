@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+ xmlns:context="http://www.springframework.org/schema/context"  
+ xmlns:p="http://www.springframework.org/schema/p"  
+ xmlns:mvc="http://www.springframework.org/schema/mvc"  
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+ xsi:schemaLocation="http://www.springframework.org/schema/beans  
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+      http://www.springframework.org/schema/context  
+      http://www.springframework.org/schema/context/spring-context.xsd  
+      http://www.springframework.org/schema/mvc  
+      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"
+default-lazy-init="true">
+      
+    <!-- 注解扫描包 -->
+ <context:component-scan base-package="com.wls" >   
+    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />    
+</context:component-scan>   
+
+    <!-- 开启注解 -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    
+    <property name="messageConverters">  
+        <list>  
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+                <property name="supportedMediaTypes">  
+                    <list>  
+                        <value>text/html;charset=UTF-8</value>  
+                        <value>application/json;charset=UTF-8</value>  
+                    </list>  
+                </property>  
+            </bean>  
+        </list>  
+    </property>  
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"></bean>
+	
+	<!-- 也是开启注解的，作用和上面的两行是一样 -->
+	<!-- <mvc:annotation-driven/> -->
+	
+	<!-- 配置返回的视图解析器 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"></property><!-- 前缀  -->
+		<property name="suffix" value=".jsp"></property><!-- 后缀  -->
+	</bean>
+	
+	<!-- 静态的资源访问 -->
+	<mvc:resources location="/WEB-INF/source/" mapping="/source/**" />
+	
+	<!-- 文件上传时间的配置 -->
+ 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="maxUploadSize" value="10485760000" />
+		<property name="maxInMemorySize" value="40960" />
+	</bean>
+	
+ </beans>  
