@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+    <tlib-version>1.0</tlib-version>
+    <short-name>msp</short-name>
+    <uri>http://www.msp.cn/jsp/jstl</uri>
+    <tag>
+        <name>selectYH</name>
+        <tag-class>com.msp.jwzwork.util.SelectYongHuTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>yonghuList</name>
+            <required>true</required><!-- 是否是必须的属性 -->
+            <rtexprvalue>true</rtexprvalue><!-- 是否支持表达式：EL或者Java表达式   rt:RunTime  expr:expression value:值 -->
+        </attribute>
+    </tag>
+</taglib>
